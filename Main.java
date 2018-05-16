@@ -16,14 +16,20 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class Main extends Application implements EventHandler<ActionEvent> {
+import javax.xml.soap.Text;
+import java.awt.event.MouseEvent;
+
+public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage){
 
+        String userGuess;
+
         TextField textField = new TextField();
 
         TextField score = new TextField();
+        score.getOnAction();
 
         TextField textField2 = new TextField();
 
@@ -34,7 +40,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         FlowPane flow = new FlowPane();
 
         Button button = new Button("Make a guess!");
-        button.setOnAction(this);
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                boolean handler = false;
+                String fun = "";
+                Controller con = new Controller();
+                //int number = con.PickRandomNumber();
+               // System.out.println("ACTUAL NUMBER: " + number + "\n");
+                   // fun = con.MakeAGuess(textField.getText(), number);
+                    System.out.println("FUN: " + fun);
+                    System.out.println("DIAG - INSIDE DO_WHILE");
+            }
+        });
 
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(5,5,5,5));
@@ -79,11 +97,21 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
 
     public static void main(String[] args) {
+        int a = 0;
+        Controller con = new Controller();
+        int randomNumber;
+        randomNumber = con.PickRandomNumber();
+        //System.out.println("TESTING: " + randomNumber);
         launch(args);
-    }
-
-    @Override
-    public void handle(ActionEvent event) {
 
     }
+
+
+
+
+//    @Override
+//    public void handle(ActionEvent event) {
+//        Controller con = new Controller();
+//        con.MakeAGuess();
+//    }
 }
