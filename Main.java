@@ -1,28 +1,23 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import javax.xml.soap.Text;
-import java.awt.event.MouseEvent;
+
 
 public class Main extends Application {
+
+    int COUNTER = 0;
 
     @Override
     public void start(Stage primaryStage) {
@@ -38,14 +33,18 @@ public class Main extends Application {
         score.getOnAction();
 
         TextField textField2 = new TextField();
+        textField2.setEditable(false);
 
-        Label label = new Label("Score: ");
+        Label label = new Label("Number of guesses: ");
 
         Label makeAGuessLabel = new Label("Insert your guess here -> ");
 
         FlowPane flow = new FlowPane();
 
         Button button = new Button("Make a guess!");
+
+
+
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -54,7 +53,18 @@ public class Main extends Application {
                 System.out.println("ACTUAL NUMBER: " + randomNumber + "\n");
                 fun = con.MakeAGuess(textField.getText(), randomNumber);
                 System.out.println("FUN: " + fun);
+                if(fun == "lower!"){
+                    COUNTER++;
+                }
+                else if (fun == "higher!"){
+                    COUNTER++;
+                }
+                else{
+                    COUNTER = 0;
+                }
                 textField2.setText(fun);
+                score.setText(String.valueOf(COUNTER));
+                System.out.println("COUNTER: " + COUNTER);
             }
         });
 
@@ -98,11 +108,6 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-
-    public void raiseCounter(){
-        int counter = 0;
-    }
-
 
     public static void main(String[] args) {
         launch(args);

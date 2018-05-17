@@ -11,7 +11,6 @@ public class Controller {
     }
 
     public String MakeAGuess(String userGuess, int randomNumber){
-        Main counter = new Main();
         System.out.println("DIAG - INSIDE MAKEAGUESS");
         int iUserGuess = Integer.parseInt(userGuess);
         if(iUserGuess > randomNumber) {
